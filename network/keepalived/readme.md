@@ -1,9 +1,6 @@
 
-# Keepalived 설정
+# Keepalived Configuration
 
-http://behindtheracks.com/2014/04/redundant-load-balancers-haproxy-and-keepalived/
-http://support.severalnines.com/entries/23612682-Install-HAProxy-and-Keepalived-Virtual-IP-
-https://raymii.org/s/tutorials/Keepalived-Simple-IP-failover-on-Ubuntu.html
 
 #### Preperation on both Servers
 /etc/sysctl.conf
@@ -85,16 +82,22 @@ secdeploy@proxy01:/etc/default$ ip a | grep bond1
 2: p3p1: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 1500 qdisc mq master bond1 state UP group default qlen 1000
 5: em2: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 1500 qdisc mq master bond1 state UP group default qlen 1000
 7: bond1: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
-    inet 172.16.15.18/24 brd 172.16.15.255 scope global bond1
-    inet 172.16.15.17/32 scope global bond1
+    inet 10.10.10.12/24 brd 10.10.10.255 scope global bond1
+    inet 10.10.10.11/32 scope global bond1
 
 secdeploy@proxy02:~$ ip a | grep bond1
 2: p3p1: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 1500 qdisc mq master bond1 state UP group default qlen 1000
 5: em2: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 1500 qdisc mq master bond1 state UP group default qlen 1000
 7: bond1: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
-    inet 172.16.15.19/24 brd 172.16.15.255 scope global bond1
+    inet 10.10.10.13/24 brd 10.10.10.255 scope global bond1
 ~~~
 
 #### Check Logs
 
 sudo tail -f /var/log/syslog | grep VRRP
+
+
+#### References
+http://behindtheracks.com/2014/04/redundant-load-balancers-haproxy-and-keepalived/
+http://support.severalnines.com/entries/23612682-Install-HAProxy-and-Keepalived-Virtual-IP-
+https://raymii.org/s/tutorials/Keepalived-Simple-IP-failover-on-Ubuntu.html
