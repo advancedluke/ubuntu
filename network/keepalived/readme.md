@@ -6,14 +6,12 @@ http://support.severalnines.com/entries/23612682-Install-HAProxy-and-Keepalived-
 https://raymii.org/s/tutorials/Keepalived-Simple-IP-failover-on-Ubuntu.html
 
 #### Preperation on both Servers
-sudo vi /etc/sysctl.conf
+/etc/sysctl.conf
 ~~~
 net.ipv4.ip_nonlocal_bind=1
 ~~~
 
-~~~
 sysctl -p
-~~~
 
 #### Install Packages
 
@@ -22,7 +20,7 @@ sudo apt-get update && apt-get install keepalived
 ~~~
 
 #### Configuration 1 on Server 01
-sudo vi /etc/keepalived/keepalived.conf
+/etc/keepalived/keepalived.conf
 ~~~
 global_defs {
   router_id proxy01
@@ -48,7 +46,7 @@ vrrp_instance 50 {
 ~~~
 
 #### Configuration 2 on Server 02
-sudo vi /etc/keepalived/keepalived.conf
+/etc/keepalived/keepalived.conf
 ~~~
 global_defs {
   router_id proxy02
@@ -74,13 +72,14 @@ vrrp_instance 50 {
 ~~~
 
 #### Restart Services 
+
 sudo service keepalived restart
 sudo service haproxy restart
 
-### Check Status
+#### Check Status
 ip a | grep eth0
 
-example :
+status example :
 ~~~
 secdeploy@proxy01:/etc/default$ ip a | grep bond1
 2: p3p1: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 1500 qdisc mq master bond1 state UP group default qlen 1000
@@ -96,7 +95,6 @@ secdeploy@proxy02:~$ ip a | grep bond1
     inet 172.16.15.19/24 brd 172.16.15.255 scope global bond1
 ~~~
 
-### Check Logs
-~~~
+#### Check Logs
+
 sudo tail -f /var/log/syslog | grep VRRP
-~~~
