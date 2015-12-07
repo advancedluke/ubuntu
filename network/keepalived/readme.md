@@ -78,14 +78,14 @@ ip a | grep eth0
 
 status example :
 ~~~
-secdeploy@proxy01:/etc/default$ ip a | grep bond1
+@proxy01:/etc/default$ ip a | grep bond1
 2: p3p1: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 1500 qdisc mq master bond1 state UP group default qlen 1000
 5: em2: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 1500 qdisc mq master bond1 state UP group default qlen 1000
 7: bond1: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
     inet 10.10.10.12/24 brd 10.10.10.255 scope global bond1
     inet 10.10.10.11/32 scope global bond1
 
-secdeploy@proxy02:~$ ip a | grep bond1
+@proxy02:~$ ip a | grep bond1
 2: p3p1: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 1500 qdisc mq master bond1 state UP group default qlen 1000
 5: em2: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 1500 qdisc mq master bond1 state UP group default qlen 1000
 7: bond1: <BROADCAST,MULTICAST,MASTER,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default
