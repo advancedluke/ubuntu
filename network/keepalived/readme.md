@@ -6,12 +6,14 @@ http://support.severalnines.com/entries/23612682-Install-HAProxy-and-Keepalived-
 https://raymii.org/s/tutorials/Keepalived-Simple-IP-failover-on-Ubuntu.html
 
 #### Preperation on both Servers
-vi /etc/sysctl.conf
+sudo vi /etc/sysctl.conf
 ~~~
 net.ipv4.ip_nonlocal_bind=1
 ~~~
 
-'sysctl -p'
+~~~
+sysctl -p
+~~~
 
 #### Install Packages
 
@@ -37,7 +39,7 @@ vrrp_instance 50 {
   state MASTER
   interface eth0
   virtual_ipaddress {
-    172.16.15.17 dev eth0
+    <vip_address> dev eth0
   }
   track_script {
     haproxy
@@ -63,7 +65,7 @@ vrrp_instance 50 {
   state MASTER
   interface eth0
   virtual_ipaddress {
-    172.16.15.17 dev eth0
+    <vip_address> dev eth0
   }
   track_script {
     haproxy
@@ -95,5 +97,6 @@ secdeploy@proxy02:~$ ip a | grep bond1
 ~~~
 
 ### Check Logs
-
-'sudo tail -f /var/log/syslog | grep VRRP'
+~~~
+sudo tail -f /var/log/syslog | grep VRRP
+~~~
