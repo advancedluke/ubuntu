@@ -4,4 +4,4 @@ sudo wget http://download.onlyoffice.com/repo/onlyoffice.key
 sudo apt-key add onlyoffice.key
 echo "deb http://download.onlyoffice.com/repo/debian squeeze main" | sudo tee -a /etc/apt/sources.list
 sudo apt-get update
-sudo apt-get install onlyoffice
+sudo apt-get install -y onlyoffice
