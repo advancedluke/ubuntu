@@ -1,3 +1,4 @@
+# https://zato.io/docs/admin/guide/install-ubuntu.html
 sudo apt-get install apt-transport-https
 sudo apt-get install python-software-properties
 
