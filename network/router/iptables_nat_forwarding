@@ -1,0 +1,29 @@
+### Common
+sudo iptables -t nat -A POSTROUTING -o "$EXTIF" -j MASQUERADE
+
+sudo iptables -A FORWARD -i "$EXTIF" -o "$INTIF" -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+sudo iptables -A FORWARD -i "$INTIF" -o "$EXTIF" -j ACCEPT
+
+### ADD
+
+EXTIF="eth0"
+INTIF="eth0"
+EXTIP="192.168.0.254"
+IFNAME="254"
+EXTSUBNET="255.255.0.0"
+INTIP="172.16.0.2"
+
+sudo ifconfig "$EXTIF":"$IFNAME" "$EXTIP" netmask "$EXTSUBNET" up
+sudo iptables -t nat -A PREROUTING -d "$EXTIP" -i "$INTIF" -j DNAT --to-destination "$INTIP"
+sudo iptables -t nat -A POSTROUTING -s "$INTIP" -o "$EXTIF" -j SNAT --to-source "$EXTIP"
+service iptables save
+
+### Check Configuration
+
+sudo iptables -L -t nat
+
+### REMOVE
+
+sudo iptables -t nat -D PREROUTING -d "$EXTIP" -i "$INTIF" -j DNAT --to-destination "$INTIP"
+sudo iptables -t nat -D POSTROUTING -s "$INTIP" -o "$EXTIF" -j SNAT --to-source "$EXTIP"
+service iptables save
