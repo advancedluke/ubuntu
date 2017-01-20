@@ -25,5 +25,7 @@ sudo make install
 cd ~
 
 # Set setenv.sh
-echo " *Add LD_LIBRARY_PATH on ${CATALINA_HOME}/bin/setenv.sh"
+echo " * Add LD_LIBRARY_PATH on ${CATALINA_HOME}/bin/setenv.sh"
 echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CATALINA_HOME/lib">> setenv.sh
+
+exit 0
